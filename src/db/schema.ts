@@ -4,8 +4,8 @@ import { relations } from 'drizzle-orm';
 
 export const customers = pgTable('customers', {
   id: serial('id').primaryKey(),
-  firsname: varchar('first_name').notNull(),
-  lastname: varchar('last_name').notNull(),
+  firstName: varchar('first_name').notNull(),
+  lastName: varchar('last_name').notNull(),
   email: varchar('email').unique().notNull(),
   phone: varchar('phone').unique().notNull(),
   address1: varchar('address1').notNull(),
@@ -22,7 +22,7 @@ export const customers = pgTable('customers', {
 
 export const tickets = pgTable('tickets', {
   id: serial('id').primaryKey(),
-  customersId: integer('customer_id').notNull().references(() => customers.id),
+  customerId: integer('customer_id').notNull().references(() => customers.id),
   title: varchar('title').notNull(),
   description: text('description'),
   completed: boolean('completed').notNull().default(false),
@@ -43,7 +43,7 @@ export const customersRelations = relations( customers,
 export const ticketsRelations = relations( tickets, 
   ({ one }) => ({
     customer: one(customers, {
-      fields: [tickets.customersId],
+      fields: [tickets.customerId],
       references: [customers.id]
     })
   })
