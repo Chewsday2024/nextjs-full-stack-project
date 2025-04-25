@@ -11,7 +11,7 @@ export default function Home() {
 
           <h2>Your PC done？</h2>
 
-          <Link href='/tickets' className="hover:underline">
+          <Link href='/login' className="hover:underline">
             <h3>I GOT YOU！</h3>
           </Link>
         </div>
