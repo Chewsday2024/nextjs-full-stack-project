@@ -6,7 +6,6 @@ import TicketForm from "@/app/(rs)/tickets/form/TicketForm";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Users, init as kindeInit } from "@kinde/management-api-js";
 
-
 export async function generateMetadata({
   searchParams
 }: {
@@ -26,8 +25,6 @@ export async function generateMetadata({
     title: `Edit Ticket #${ticketId}`
   }
 }
-
-
 
 export default async function TicketFormPage ({
   searchParams
@@ -49,17 +46,13 @@ export default async function TicketFormPage ({
       )
     }
 
-
     const { getPermission, getUser } = getKindeServerSession();
     const [managerPermission, user] = await Promise.all([
       getPermission('manager'),
       getUser()
     ]);
 
-
     const isManager = managerPermission?.isGranted;
-
-
 
     if (customerId) {
       const customer = await getCustomer(parseInt(customerId))
@@ -75,7 +68,6 @@ export default async function TicketFormPage ({
           </>
         )
       }
-
 
       if (!customer.active) {
         return (
@@ -96,12 +88,11 @@ export default async function TicketFormPage ({
 
         const techs = users ? users.map(user => ({ id: user.email!, description: user.email! })) : []
 
-        return <TicketForm customer={customer} techs={techs} />
+        return <TicketForm customer={customer} techs={techs} isManager={isManager} />
       } else {
         return <TicketForm customer={customer} />
       }
     }
-
 
     if (ticketId) {
       const ticket = await getTicket(parseInt(ticketId))
@@ -118,18 +109,18 @@ export default async function TicketFormPage ({
         )
       }
 
-
       const customer = await getCustomer(ticket.customerId)
 
       if (isManager) {
         kindeInit()
+
         const { users } = await Users.getUsers();
 
-        const techs = users ? users.map(user => ({ id: user.email!, description: user.email! })) : []
+        const techs = users ? users.map(user => ({ id: user.email!.toLowerCase(), description: user.email!.toLowerCase() })) : []
 
-        return <TicketForm customer={customer} ticket={ticket} techs={techs} />
+        return <TicketForm customer={customer} ticket={ticket} techs={techs} isManager={isManager} />
       } else {
-        const isEditable = user.email.toLowerCase() === ticket.tech.toLowerCase()
+        const isEditable = user?.email?.toLowerCase() === ticket.tech.toLowerCase()
 
         return <TicketForm customer={customer} ticket={ticket} isEditable={isEditable} />
       }
