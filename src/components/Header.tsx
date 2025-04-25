@@ -4,6 +4,7 @@ import { ModeToggle } from "@/components/ModeToggle";
 import { Button } from "@/components/ui/button";
 import NavButton from "@/components/NavButton";
 import Link from "next/link";
+import { NavButtonMenu } from "@/components/NavButtonMenu";
 
 
 
@@ -24,7 +25,14 @@ function Header() {
         <div className="flex items-center">
           <NavButton href="/tickets" label="tickets" icon={File} />
 
-          <NavButton href="/customers" label="customers" icon={UsersRound} />
+          <NavButtonMenu
+            icon={UsersRound}
+            label="Customers Menu"
+            choices={[
+              { title: 'Search Customers', href: '/customers' },
+              { title: 'New Customers', href: '/customers/form' },
+            ]}
+          />
 
           <ModeToggle />
 
