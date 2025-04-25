@@ -23,6 +23,7 @@ export function BackButton (
       className={className}
       onClick={() => router.back()}
       title={title}
+      {...props}
     >
       {title}
     </Button>

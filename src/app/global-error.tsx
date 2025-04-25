@@ -1,4 +1,7 @@
-'use client' // Error boundaries must be Client Components
+'use client'
+import { toast } from "sonner"
+
+ // Error boundaries must be Client Components
  
 export default function GlobalError({
   error,
@@ -7,6 +10,7 @@ export default function GlobalError({
   error: Error & { digest?: string }
   reset: () => void
 }) {
+  toast.error(error.message)
   return (
     // global-error must include html and body tags
     <html>

@@ -63,7 +63,7 @@ export default function TicketForm({
           description: data?.message
         })
       },
-      onError({   }) {
+      onError() {
         toast.error('Error', {
           description: 'Save Failed'
         })
