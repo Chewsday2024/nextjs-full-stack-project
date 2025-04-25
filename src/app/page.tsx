@@ -9,10 +9,10 @@ export default function Home() {
         <div className="flex flex-col gap-6 p-12 rounded-xl bg-black/90 w-4/5 sm:max-w-96 mx-auto text-white sm:text-2xl">
           <h1 className="text-4xl font-bold">Sir！</h1>
 
-          <h2>Are you Dog？</h2>
+          <h2>Your PC done？</h2>
 
-          <Link href='holy' className="hover:underline">
-            <h3>Yes！YOU ARE！</h3>
+          <Link href='/tickets' className="hover:underline">
+            <h3>I GOT YOU！</h3>
           </Link>
         </div>
       </main>
